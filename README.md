@@ -12,6 +12,8 @@ This CLI program allows you to fetch and view the recent activity of any GitHub 
 - Display contribution statistics
 - Real-time activity updates
 
-## Installation
+## How to use
 
-A CLI program to show recent activity of a github user
+run the following command in the terminal
+
+`python github-activity.py <username>`

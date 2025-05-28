@@ -1,8 +1,10 @@
+import argparse
 from fetch_data import import_data
 
 def showMessage(username):
     response = import_data(username)
     count = 0
+    print("\n")
     for event in response:
         match event["type"]:
             case "PushEvent":
@@ -13,9 +15,9 @@ def showMessage(username):
             case "WatchEvent":
                 print(f"- Starred {event["repo"]["name"]}")
             case "CreateEvent":
-                print(f"- Created {event["payload"]["ref_type"]} in {event["repo"]["name"]}")
+                print(f"- Created a {event["payload"]["ref_type"]} in {event["repo"]["name"]}")
             case "DeleteEvent":
-                print(f"- Deleted {event["payload"]["ref_type"]} in {event["repo"]["name"]}")
+                print(f"- Deleted a {event["payload"]["ref_type"]} in {event["repo"]["name"]}")
             case "ForkEvent":
                 print(f"- Forked {event["repo"]["name"]}")
             case "IssueCommentEvent":
@@ -33,10 +35,15 @@ def showMessage(username):
                 action = event["payload"]["action"]
                 print(f"- {action[0].upper()}{action[1::]} a pull request review comment in {event["repo"]["name"]}")
         count += 1  
-    print(f"\nResults: {count}/30 events shown")    
+    print(f"\nResults: {count}/{len(response)} events shown")    
+    
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("username")
+    args = parser.parse_args()
+    showMessage(args.username)
+    
+if __name__ == "__main__":
+    main()
                 
                        
-if __name__ == "__main__":
-    username = input("Please provide a github username: ")
-    showMessage(username)
-    
