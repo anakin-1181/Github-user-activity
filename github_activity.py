@@ -1,8 +1,5 @@
 import argparse
 from fetch_data import import_data
-import warnings
-
-warnings.filterwarnings("ignore", category=UserWarning, module='pyimod02_importers')
 
 def showMessage(username):
     try:
