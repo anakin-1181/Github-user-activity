@@ -3,11 +3,11 @@ import json
 
 def import_data(username="kamranahmedse"):
     import_string = f"https://api.github.com/users/{username}/events"
-    try:
-        response = requests.get(import_string).json()
-    except:
-        raise Exception("The user doen't exist.")
-    return response
+    response = requests.get(import_string)
+    if response.status_code != 200:
+        raise ValueError(f"GitHub API error: {response.status_code} - {response.reason}")
+    data = response.json()
+    return data
 
 def print_data():
     response = import_data()
@@ -27,5 +27,5 @@ def type_check(username="kamranahmedse"):
     print(num_count, count)
     
 if __name__ == "__main__":
-    type_check()
+    print_data()
     
