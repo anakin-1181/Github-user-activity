@@ -16,4 +16,4 @@ This CLI program allows you to fetch and view the recent activity of any GitHub 
 
 run the following command in the terminal
 
-`python github-activity.py <username>`
+`dist/github_activity`
